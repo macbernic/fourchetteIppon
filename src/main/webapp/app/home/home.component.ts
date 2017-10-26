@@ -6,6 +6,7 @@ import { Restaurant } from '../entities/restaurant/restaurant.model';
 
 import { Account, LoginModalService, Principal, ITEMS_PER_PAGE } from '../shared';
 import {ResponseWrapper} from "../shared/model/response-wrapper.model";
+import {LocationService} from "../entities/location/location.service";
 
 @Component({
     selector: 'jhi-home',
@@ -28,8 +29,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager,
         private restaurantService: RestaurantService,
+        private locationService: LocationService,
         private jhiAlertService: JhiAlertService
     ) {
+        this.restaurants = [];
         this.restaurants = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.page = 0;
@@ -75,10 +78,14 @@ export class HomeComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
+
     }
     private onSuccess(data, headers) {
         for (let i = 0; i < data.length; i++) {
-            this.restaurants.push(data[i]);
+            this.locationService.find(data[i].locationId).subscribe((location) => {
+                data[i].locationName = location.streetAddress + ' ' + location.postalCode + ' ' + location.city;
+                this.restaurants.push(data[i]);
+            });
         }
     }
 
@@ -89,5 +96,4 @@ export class HomeComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         //this.eventManager.destroy(this.eventSubscriber);
     }
-
 }

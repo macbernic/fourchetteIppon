@@ -34,19 +34,8 @@ export class LocationDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.countryService
-            .query({filter: 'location-is-null'})
-            .subscribe((res: ResponseWrapper) => {
-                if (!this.location.countryId) {
-                    this.countries = res.json;
-                } else {
-                    this.countryService
-                        .find(this.location.countryId)
-                        .subscribe((subRes: Country) => {
-                            this.countries = [subRes].concat(res.json);
-                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
-                }
-            }, (res: ResponseWrapper) => this.onError(res.json));
+        this.countryService.query()
+            .subscribe((res: ResponseWrapper) => { this.countries = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {

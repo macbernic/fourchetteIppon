@@ -30,17 +30,16 @@ entity Contributeur {
 	creationDate ZonedDateTime
 }
 
-relationship OneToOne {
+relationship ManyToOne {
 	Location{country} to Country
 }
+
 relationship OneToOne {
 	Restaurant{location} to Location
 }
-relationship OneToMany {
-	Contributeur{rating} to Rating
-}
 
 relationship OneToMany {
+	Contributeur{rating} to Rating,
     Restaurant{rating} to Rating
 }
 

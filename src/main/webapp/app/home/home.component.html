@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
+        <span class="fourchette img-fluid rounded"></span>
     </div>
     <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
+        <h1 class="display-4">Bienvenue sur Fourchette Ippon !</h1>
         <p class="lead">This is your homepage</p>
 
         <div [ngSwitch]="isAuthenticated()">
@@ -26,7 +26,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-                    <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+                    <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
                     <th jhiSortBy="restaurantName"><span>Restaurant Name</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="locationId"><span>Location</span> <span class="fa fa-sort"></span></th>
                     <th></th>
@@ -34,11 +34,11 @@
                 </thead>
                 <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let restaurant of restaurants ;trackBy: trackId">
-                    <td><a [routerLink]="['../restaurant', restaurant.id ]">{{restaurant.id}}</a></td>
+                    <!--<td><a [routerLink]="['../restaurant', restaurant.id ]">{{restaurant.id}}</a></td>-->
                     <td>{{restaurant.restaurantName}}</td>
                     <td>
                         <div *ngIf="restaurant.locationId">
-                            <a [routerLink]="['../location', restaurant.locationId  ]" >{{restaurant.locationId}}</a>
+                            <a [routerLink]="['../location', restaurant.locationId  ]" >{{restaurant.locationName}}</a>
                         </div>
                     </td>
                     <td class="text-right">

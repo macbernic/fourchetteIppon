@@ -1,27 +1,23 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs/Rx';
-import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import {Location} from './location.model';
-import {LocationService} from './location.service';
-import {Principal, ResponseWrapper} from '../../shared';
-import {CountryService} from '../country/country.service';
-import {Country} from '../country/country.model';
+import { Location } from './location.model';
+import { LocationService } from './location.service';
+import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-location',
     templateUrl: './location.component.html'
 })
 export class LocationComponent implements OnInit, OnDestroy {
-    locations: Location[];
-    countries: Country[];
-
+locations: Location[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
     constructor(
         private locationService: LocationService,
-        private countryService: CountryService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal
@@ -35,16 +31,6 @@ export class LocationComponent implements OnInit, OnDestroy {
             },
             (res: ResponseWrapper) => this.onError(res.json)
         );
-
-        /*this.locations[0].country
-        this.countryService.query().subscribe(
-            (res: ResponseWrapper) => {
-                this.countries = res.json;
-                console.log(this.countries)
-            },
-            (res: ResponseWrapper) => this.onError(res.json)
-        );*/
-
     }
     ngOnInit() {
         this.loadAll();
