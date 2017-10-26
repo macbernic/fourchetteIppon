@@ -31,14 +31,19 @@ entity Contributeur {
 }
 
 relationship OneToOne {
-	Location{country} to Country,
+	Location{country} to Country
+}
+relationship OneToOne {
 	Restaurant{location} to Location
+}
+relationship OneToMany {
+	Contributeur{rating} to Rating
 }
 
 relationship OneToMany {
-	Contributeur to Rating,
-    Restaurant to Rating
+    Restaurant{rating} to Rating
 }
+
 
 // Set pagination options
 paginate Contributeur, Restaurant, Rating with infinite-scroll
@@ -47,6 +52,3 @@ dto * with mapstruct
 
 // Set service options to all except few
 service all with serviceImpl
-
-// Set an angular suffix
-angularSuffix * with myNgSuffix

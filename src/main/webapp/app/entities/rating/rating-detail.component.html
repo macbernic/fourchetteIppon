@@ -1,0 +1,41 @@
+
+<div *ngIf="rating">
+    <h2><span>Rating</span> {{rating.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Fork</span></dt>
+        <dd>
+            <span>{{rating.fork}}</span>
+        </dd>
+        <dt><span>Comment</span></dt>
+        <dd>
+            <span>{{rating.comment}}</span>
+        </dd>
+        <dt><span>Restaurant</span></dt>
+        <dd>
+            <div *ngIf="rating.restaurantId">
+                <a [routerLink]="['/restaurant', rating.restaurantId]">{{rating.restaurantId}}</a>
+            </div>
+        </dd>
+        <dt><span>Contributeur</span></dt>
+        <dd>
+            <div *ngIf="rating.contributeurId">
+                <a [routerLink]="['/contributeur', rating.contributeurId]">{{rating.contributeurId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'rating/'+ rating.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

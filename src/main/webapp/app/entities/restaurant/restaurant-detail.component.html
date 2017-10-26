@@ -1,0 +1,31 @@
+
+<div *ngIf="restaurant">
+    <h2><span>Restaurant</span> {{restaurant.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Restaurant Name</span></dt>
+        <dd>
+            <span>{{restaurant.restaurantName}}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+            <div *ngIf="restaurant.locationId">
+                <a [routerLink]="['/location', restaurant.locationId]">{{restaurant.locationId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
