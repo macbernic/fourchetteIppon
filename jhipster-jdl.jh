@@ -1,13 +1,7 @@
-entity Region {
-	regionName String
-}
-
 entity Country {
 	countryName String
 }
 
-// an ignored comment
-/** not an ignored comment */
 entity Location {
 	streetAddress String,
 	postalCode String,
@@ -16,54 +10,43 @@ entity Location {
 }
 
 entity Restaurant {
-	name String required
+	restaurantName String required
 }
+
+enum FORK {
+	AVOID, POOR, ACCEPTABLE, NICE, GREAT
+}
+
 entity Rating {
-	comment String required
+    fork FORK required,
+	comment String
 }
 
-enum Fork {
-	L1, L2, L3, L4, L5
-}
-
-/**
- * The Employee entity.
- */
 entity Contributeur {
-	/**
-	* The firstname attribute.
-	*/
 	firstName String,
 	lastName String,
-	email String,
+	email String required,
 	phoneNumber String,
 	creationDate ZonedDateTime
 }
 
 relationship OneToOne {
-	Country{region} to Region,
-    Rating to Fork,
 	Location{country} to Country,
 	Restaurant{location} to Location
 }
 
-
-// defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Contributeur{note} to Rating,
-    Contributeur to Restaurant,
-  
+	Contributeur to Rating,
     Restaurant to Rating
 }
 
-
 // Set pagination options
-paginate Restaurant with infinite-scroll
-paginate Job with pagination
+paginate Contributeur, Restaurant, Rating with infinite-scroll
 
 dto * with mapstruct
 
 // Set service options to all except few
-service all with serviceImpl except Employee, Job
+service all with serviceImpl
+
 // Set an angular suffix
-angularSuffix * with mySuffix
+angularSuffix * with myNgSuffix
