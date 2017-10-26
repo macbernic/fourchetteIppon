@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Rating } from './rating.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {Restaurant} from "../restaurant/restaurant.model";
 
 @Injectable()
 export class RatingService {

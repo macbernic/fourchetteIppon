@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-9">
         <h1 class="display-4">Bienvenue sur Fourchette Ippon !</h1>
-        <p class="lead">This is your homepage</p>
+        <p class="lead">A table !</p>
 
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
@@ -27,6 +27,7 @@
                 <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
                     <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
+                    <th jhiSortBy="rating"><span>Avis</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="restaurantName"><span>Restaurant Name</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="locationId"><span>Location</span> <span class="fa fa-sort"></span></th>
                     <th></th>
@@ -35,6 +36,7 @@
                 <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let restaurant of restaurants ;trackBy: trackId">
                     <!--<td><a [routerLink]="['../restaurant', restaurant.id ]">{{restaurant.id}}</a></td>-->
+                    <td><a [routerLink]="['../restaurant', restaurant.id ]">{{restaurant.id}}</a></td>
                     <td>{{restaurant.restaurantName}}</td>
                     <td>
                         <div *ngIf="restaurant.locationId">
@@ -70,20 +72,18 @@
             </table>
         </div>
 
-        <p>
-            If you have any question on JHipster:
+        <p>Envie de tester un nouveau resto autour d'Ippon ?<br>
+            Ca tombe bien, des dizaines d'adresses gourmandes sont là pour vous satisfaire ! <br>Pour vous aider à trouver la vôtre, découvrez les meilleurs restaurants du 16ème, du bistro aux plus belles tables gastronomiques. Chic !
         </p>
 
-        <ul>
-            <li><a href="http://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>
-        </ul>
 
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener">GitHub</a>!
-        </p>
+        <!--<ul>-->
+            <!--<li><a href="http://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>-->
+            <!--<li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>-->
+            <!--<li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>-->
+            <!--<li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>-->
+            <!--<li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>-->
+        <!--</ul>-->
+
     </div>
 </div>

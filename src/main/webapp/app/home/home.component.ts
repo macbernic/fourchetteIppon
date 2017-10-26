@@ -7,6 +7,7 @@ import { Restaurant } from '../entities/restaurant/restaurant.model';
 import { Account, LoginModalService, Principal, ITEMS_PER_PAGE } from '../shared';
 import {ResponseWrapper} from "../shared/model/response-wrapper.model";
 import {LocationService} from "../entities/location/location.service";
+import {RatingService} from "../entities/rating/rating.service";
 
 @Component({
     selector: 'jhi-home',
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private restaurantService: RestaurantService,
         private locationService: LocationService,
+        private ratingService: RatingService,
         private jhiAlertService: JhiAlertService
     ) {
         this.restaurants = [];
@@ -84,8 +86,14 @@ export class HomeComponent implements OnInit, OnDestroy {
         for (let i = 0; i < data.length; i++) {
             this.locationService.find(data[i].locationId).subscribe((location) => {
                 data[i].locationName = location.streetAddress + ' ' + location.postalCode + ' ' + location.city;
-                this.restaurants.push(data[i]);
             });
+
+           /* this.ratingService.findByRestaurant(data[i]).subscribe((ratings) => {
+                console.log("ratings:" + ratings);
+                data[i].ratings = ratings;
+            });*/
+
+            this.restaurants.push(data[i]);
         }
     }
 
