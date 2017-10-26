@@ -62,6 +62,7 @@ export class RestaurantComponent implements OnInit, OnDestroy {
         this.page = page;
         this.loadAll();
     }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {
