@@ -22,6 +22,54 @@
             </div>
         </div>
 
+        <div class="table-responsive" *ngIf="restaurants">
+            <table class="table table-striped">
+                <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                    <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="restaurantName"><span>Restaurant Name</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="locationId"><span>Location</span> <span class="fa fa-sort"></span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let restaurant of restaurants ;trackBy: trackId">
+                    <td><a [routerLink]="['../restaurant', restaurant.id ]">{{restaurant.id}}</a></td>
+                    <td>{{restaurant.restaurantName}}</td>
+                    <td>
+                        <div *ngIf="restaurant.locationId">
+                            <a [routerLink]="['../location', restaurant.locationId  ]" >{{restaurant.locationId}}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    [routerLink]="['../restaurant', restaurant.id ]"
+                                    class="btn btn-info btn-sm">
+                                <span class="fa fa-eye"></span>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/edit'} }]"
+                                    replaceUrl="true"
+                                    class="btn btn-primary btn-sm">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'restaurant/'+ restaurant.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    class="btn btn-danger btn-sm">
+                                <span class="fa fa-remove"></span>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
         <p>
             If you have any question on JHipster:
         </p>
