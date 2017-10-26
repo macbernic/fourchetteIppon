@@ -40,7 +40,7 @@
                     <td>{{restaurant.restaurantName}}</td>
                     <td>
                         <div *ngIf="restaurant.locationId">
-                            <a [routerLink]="['../location', restaurant.locationId  ]" >{{restaurant.locationName}}</a>
+                            <a [routerLink]="['../location', restaurant.locationId  ]">{{restaurant.locationName}}</a>&nbsp;&nbsp;&nbsp;<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5k3CAh3qrp_PxK8lwpPRDh2SZgMSWMgH8T-I-yi-VCgtazTJq" href="https://maps.google.fr/" style="width:5%;height:5%;">
                         </div>
                     </td>
                     <td class="text-right">
@@ -72,7 +72,8 @@
             </table>
         </div>
 
-        <p>Envie de tester un nouveau resto autour d'Ippon ?<br>
+        <h5>Envie de tester un nouveau resto autour d'Ippon ?</h5>
+        <p>
             Ca tombe bien, des dizaines d'adresses gourmandes sont là pour vous satisfaire ! <br>Pour vous aider à trouver la vôtre, découvrez les meilleurs restaurants du 16ème, du bistro aux plus belles tables gastronomiques. Chic !
         </p>
 
